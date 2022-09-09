@@ -20,8 +20,12 @@ export const fetchProducts = () => {
       console.log(data.products);
       return data.products;
     };
-    const products = await fetchData();
-    dispatch(productsActions.addToProducts(products));
+    try {
+      const products = await fetchData();
+      dispatch(productsActions.addToProducts(products));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 export const productsActions = productSlice.actions;
