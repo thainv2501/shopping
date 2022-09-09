@@ -11,6 +11,7 @@ const productSlice = createSlice({
     },
   },
 });
+
 export const fetchProducts = () => {
   return async (dispatch) => {
     const fetchData = async () => {
