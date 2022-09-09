@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { productsActions } from "./reducers/productsSlice";
+import Products from "./components/Products/Products";
+import Cart from "./components/Cart/Cart";
+import Nav from "./components/Nav/Nav";
 
 function App() {
+  const dispatch = useDispatch();
+  const showCart = useSelector((state) => state.cart.showCart);
+  const fetchProducts = async () => {
+    const respond = await fetch("https://dummyjson.com/products");
+    const data = await respond.json();
+    console.log(data.products);
+    dispatch(productsActions.addToProducts(data.products));
+  };
+  useEffect(() => {
+    fetchProducts();
+    return () => {
+      console.log("function clear was run , now run effect");
+    };
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav></Nav>
+      <Products></Products>
+      {showCart && <Cart></Cart>}
     </div>
   );
 }

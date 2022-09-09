@@ -1,0 +1,20 @@
+.nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    z-index: 100;
+}
+
+.shopping_cart_btn {
+    cursor: pointer;
+    padding: 0.2rem;
+    background-color: rgba(118, 120, 189, 0.4);
+    border-radius: 5%;
+}
+
+.shopping_cart_btn:hover {
+    background-color: rgba(178, 178, 187, 0.4);
+}
